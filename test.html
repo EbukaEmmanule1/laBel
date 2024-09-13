@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Interest Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .calculator-container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+      width: 300px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #1f7b65;
+    }
+
+    .input-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #333;
+    }
+
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    .btn {
+      background-color: #1f7b65;
+      color: white;
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .btn:hover {
+      background-color: #14594b;
+    }
+
+    .result {
+      margin-top: 15px;
+      padding: 10px;
+      border-radius: 5px;
+      background-color: #e0f7f1;
+      color: #333;
+    }
+
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="calculator-container">
+    <h2>Simple Interest Calculator</h2>
+    <div class="input-group">
+      <label for="principal">Principal ($)</label>
+      <input type="number" id="principal" placeholder="Enter principal amount">
+    </div>
+    <div class="input-group">
+      <label for="rate">Rate (%)</label>
+      <input type="number" id="rate" placeholder="Enter interest rate">
+    </div>
+    <div class="input-group">
+      <label for="time">Time (years)</label>
+      <input type="number" id="time" placeholder="Enter time in years">
+    </div>
+    <button class="btn" onclick="calculateInterest()">Calculate Interest</button>
+    
+    <div id="result" class="result"></div>
+  </div>
+
+  <script>
+    function calculateInterest() {
+      // Get input values
+      const principal = document.getElementById('principal').value;
+      const rate = document.getElementById('rate').value;
+      const time = document.getElementById('time').value;
+
+      // Validate inputs
+      if (principal === '' || rate === '' || time === '') {
+        document.getElementById('result').innerHTML = '<p class="error">Please fill in all fields</p>';
+        return;
+      }
+
+      // Calculate simple interest
+      const interest = (principal * rate * time) / 100;
+
+      // Check if interest falls within the desired range
+      if (interest > 1000) {
+        document.getElementById('result').innerHTML = `<p>Total Interest: $${interest.toFixed(2)}<br>Interest exceeds the maximum limit of $1000.</p>`;
+      } else if (interest < 500) {
+        document.getElementById('result').innerHTML = `<p>Total Interest: $${interest.toFixed(2)}<br>Interest is below the minimum limit of $500.</p>`;
+      } else {
+        document.getElementById('result').innerHTML = `<p>Total Interest: $${interest.toFixed(2)}<br>Interest is within the acceptable range ($500 - $1000).</p>`;
+      }
+    }
+  </script>
+
+</body>
+</html>
